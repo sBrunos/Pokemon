@@ -2,8 +2,6 @@ package pucrs.ep.poo.cartas.modelo;
 
 import java.util.*;
 
-
-
 public class Card extends Observable{//carta observavél
     private String id;
     private String imageId;//nome da imagem

@@ -19,16 +19,16 @@ public class ImageFactory{
     //trocar estes caminhos para o nosso jogo de pokemon
     private String id2File(String imgId){
         switch(imgId){
-            case "img1" : return("file:./images/Um.png");//id da imagem em endereco da imagem
-            case "img2" : return("file:./images/Dois.png");// só alterar aqui os nomes/caminhos
-            case "img3" : return("file:./images/Tres.png");
-            case "img4" : return("file:./images/Quatro.png");
-            case "img5" : return("file:./images/Cinco.png");
-            case "img6" : return("file:./images/Seis.png");
-            case "img7" : return("file:./images/Sete.png");
-            case "img8" : return("file:./images/Oito.png");
-            case "img9" : return("file:./images/Nove.png");
-            case "img10" : return("file:./images/Dez.png");
+            case "img1" : return("file:./images/Squirtle.png");//id da imagem em endereco da imagem
+            case "img2" : return("file:./images/Bulbasaur.png");// só alterar aqui os nomes/caminhos
+            case "img3" : return("file:./images/Caterpie.png");//id da imagem em endereco da imagem
+            case "img4" : return("file:./images/Charmander.png");// só alterar aqui os nomes/caminhos
+            case "img5" : return("file:./images/Geodude.png");//id da imagem em endereco da imagem
+            case "img6" : return("file:./images/Pidgey.png");// só alterar aqui os nomes/caminhos
+            case "img7" : return("file:./images/Pikachu.png");//id da imagem em endereco da imagem
+            case "img8" : return("file:./images/Rattata.png");// só alterar aqui os nomes/caminhos
+            case "img9" : return("file:./images/Sandshrew.png");//id da imagem em endereco da imagem
+            case "img10" : return("file:./images/Ekans.png");// só alterar aqui os nomes/caminhos
             case "imgBck" : return("file:./images/Back.png");
             default: throw new IllegalArgumentException("Invalid image Id");
         }

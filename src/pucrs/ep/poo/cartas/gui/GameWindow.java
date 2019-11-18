@@ -41,9 +41,14 @@ public class GameWindow extends Application implements Observer{
         
         PlacarView placar = new PlacarView();
         grid.add(placar,0,1);
-        
+
+        //Declarar elemento:
         Button butClean = new Button("Clean");
+
+        //Adicionar na grid:
         grid.add(butClean,1,1);
+
+        //Adicionar ação:
         butClean.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
