@@ -12,6 +12,8 @@ public class CardView extends Button implements Observer{
     private CardObserver observer;
     
     public CardView(Card aCard){
+
+        //cria botão sem texto e com imagem:
         super("",ImageFactory.getInstance().createImage("imgBck"));
         card = aCard;
         card.addObserver(this);
@@ -30,7 +32,7 @@ public class CardView extends Button implements Observer{
     @Override
     public void update(Observable o,Object args){
         if (card.isFacedUp()){
-            this.setGraphic(ImageFactory.getInstance().createImage(card.getImageId()));
+            this.setGraphic(ImageFactory.getInstance().createImage(card.getId()));
         }else{
             this.setGraphic(ImageFactory.getInstance().createImage("imgBck"));
         }   

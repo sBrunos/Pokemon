@@ -35,6 +35,7 @@ public class ImageFactory{
     }
     
     public ImageView createImage(String imgId){
+        System.out.println(imgId);
         Image img = images.get(imgId);
         if (img == null){
             img = new Image(id2File(imgId));

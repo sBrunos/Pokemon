@@ -9,7 +9,7 @@ import java.util.*;
 
 // Esta classe tem de ser um container de cartas observavel ...
 public class CardDeck extends Observable{
-    public static final int NCARDS = 6;//
+    public static final int NCARDS = 5;//
     private List<Card> cartas;//cartas na mao
     private Card selected;//selecionada no momento
     
@@ -19,8 +19,8 @@ public class CardDeck extends Observable{
        Random r = new Random();//o Random gera numeros aleatórios
        for(int i=0;i<NCARDS;i++){//sorteia as cartas
            int n = r.nextInt(10)+1;
-           Card c = new Card("C"+n,"img"+n,n);//
-           c.flip();
+           Card c = new Card("C"+n,"img"+n, n);//
+           c.select();
            cartas.add(c);
        }
     }
@@ -43,7 +43,17 @@ public class CardDeck extends Observable{
         setChanged();
         notifyObservers(gameEvent);//avisou que exemplo "a carta 10 foi tirada"
     }    
-        
+
+    public int getVidaTotal(){
+
+        int vidaTotal = 0;
+
+        for ( Card i : cartas ) {
+            vidaTotal += i.getVida();
+        }
+
+        return vidaTotal;
+    };
     public Card getSelectedCard(){
         return(selected);
     }//pergunta se a carta está selecionada

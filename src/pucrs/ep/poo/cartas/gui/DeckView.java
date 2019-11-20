@@ -64,6 +64,9 @@ public class DeckView extends HBox implements CardObserver,Observer{
         if (ge.getAction() == GameEvent.Action.REMOVESEL){
             removeSel();
         }
+        if(ge.getAction() == GameEvent.Action.SELECTCARD){
+
+        }
     }
 }
 

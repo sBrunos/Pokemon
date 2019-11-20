@@ -8,14 +8,13 @@ import java.util.*;
 //
 public class Game extends Observable{
     private static Game game = new Game();//coleções/simbotol()instancia da classe
-    private int ptsJ1,ptsJ2;//
     private CardDeck deckJ1,deckJ2;//2 pessoas
     private int player;//que tem na vez
     private int jogadas;//qtas já jogou
+    private int vida1;
+    private int vida2;
     
     private Game(){//constru privat
-        ptsJ1 = 0;
-        ptsJ2 = 0;
         deckJ1 = new CardDeck();//distribui as cartas deckJ1 = new CardDeck(baralho 1);
         deckJ2 = new CardDeck();//baralho 2 deckJ2 = new CardDeck(baralho 2);
         player = 1;//o jogador 1 é o primeiro a jogar
@@ -32,19 +31,27 @@ public class Game extends Observable{
             player = 1;
         }
     }
-        
-    public int getPtsJ1(){
-        return(ptsJ1);
-    }
-
-    public int getPtsJ2(){
-        return(ptsJ2);
-    }
     
     public CardDeck getDeckJ1(){
         return(deckJ1);
     }
-    
+
+    public int getvida1(){
+        return(vida1);
+    }
+
+    public int getvida2(){
+        return(vida2);
+    }
+    public void setvida1(int vida){
+        vida1 = vida;
+    }
+
+    public void setvida2(int vida){
+        vida2 = vida;
+    }
+
+
     public CardDeck getDeckJ2(){
         return(deckJ2);
     }
@@ -67,7 +74,7 @@ public class Game extends Observable{
                 notifyObservers((Object)gameEvent);//
             }else{
                 // Vira a carta
-                deckJ1.getSelectedCard().flip();//carta selecionda, flip virou ela
+                deckJ1.getSelectedCard().select();//carta selecionda, flip virou ela
                 // Proximo jogador
                 nextPlayer();//n jog passa a ser 3
             }
@@ -78,13 +85,8 @@ public class Game extends Observable{
                 notifyObservers((Object)gameEvent);
             }else{
                 // Vira a carta
-                deckJ2.getSelectedCard().flip();
+                deckJ2.getSelectedCard().select();
                 // Verifica quem ganhou a rodada
-                if (deckJ1.getSelectedCard().getValue() > deckJ2.getSelectedCard().getValue()){//mudar aqui a lógica
-                    ptsJ1++;
-                }else if (deckJ1.getSelectedCard().getValue() < deckJ2.getSelectedCard().getValue()){
-                    ptsJ2++;//soma os pontos do jogador
-                }
                 setChanged();
                 notifyObservers((Object)gameEvent);
                 // Próximo jogador

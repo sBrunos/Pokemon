@@ -25,7 +25,7 @@ public class GameWindow extends Application implements Observer{
     public void start(Stage primaryStage) {
         Game.getInstance().addObserver(this);
         
-        primaryStage.setTitle("Batalha de Cartas");
+        primaryStage.setTitle("POKÉMON");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -43,7 +43,7 @@ public class GameWindow extends Application implements Observer{
         grid.add(placar,0,1);
 
         //Declarar elemento:
-        Button butClean = new Button("Clean");
+        Button butClean = new Button("Batalhar");
 
         //Adicionar na grid:
         grid.add(butClean,1,1);

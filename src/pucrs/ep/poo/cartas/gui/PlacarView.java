@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 import pucrs.ep.poo.cartas.modelo.Game;
 
 public class PlacarView extends GridPane implements Observer{
-    private TextField ptsJ1,ptsJ2;
+    private TextField vida1,vida2;
     
     public PlacarView(){
         this.setAlignment(Pos.CENTER);
@@ -18,23 +18,23 @@ public class PlacarView extends GridPane implements Observer{
         this.setPadding(new Insets(25, 25, 25, 25));
         
         Game.getInstance().addObserver(this);
-        
-        ptsJ1 = new TextField();
-        ptsJ2 = new TextField();
-      
-        ptsJ1.setText(""+Game.getInstance().getPtsJ1());
-        ptsJ2.setText(""+Game.getInstance().getPtsJ2());
 
-        this.add(new Label("Jogador 1:"),0,0);
-        this.add(ptsJ1,1,0);
-        this.add(new Label("Jogador 2:"),0,1);
-        this.add(ptsJ2,1,1);
+        vida1 = new TextField();
+        vida2 = new TextField();
+
+        vida1.setText(""+Game.getInstance().getvida1());
+        vida2.setText(""+Game.getInstance().getvida2());
+
+        this.add(new Label("Vida do jogador 1:"),0,0);
+        this.add(vida1,1,0);
+        this.add(new Label("Vida do jogador 2:"),0,1);
+        this.add(vida2,1,1);
     }
     
     @Override
     public void update(Observable o,Object arg){
-        ptsJ1.setText(""+Game.getInstance().getPtsJ1());
-        ptsJ2.setText(""+Game.getInstance().getPtsJ2());
+        vida1.setText(""+Game.getInstance().getvida1());
+        vida2.setText(""+Game.getInstance().getvida2());
     }    
 }
 
