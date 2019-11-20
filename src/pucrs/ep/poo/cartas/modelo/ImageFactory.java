@@ -29,6 +29,8 @@ public class ImageFactory{
             case "img8" : return("file:./images/Rattata.png");// só alterar aqui os nomes/caminhos
             case "img9" : return("file:./images/Sandshrew.png");//id da imagem em endereco da imagem
             case "img10" : return("file:./images/Ekans.png");// só alterar aqui os nomes/caminhos
+            case "img11" : return("file:./images/Powerup.png");// só alterar aqui os nomes/caminhos
+            case "img12" : return("file:./images/Healthup.png");// só alterar aqui os nomes/caminhos
             case "imgBck" : return("file:./images/Back.png");
             default: throw new IllegalArgumentException("Invalid image Id");
         }

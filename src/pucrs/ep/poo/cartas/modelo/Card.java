@@ -8,6 +8,7 @@ public class Card extends Observable{//carta observavél
     private int vida;//1,2,3,4,5,6....atuar na vida
     private int ataque; // representa a força
     private boolean faceUp;//carta virada ou não
+    private enum tipo {POWERUP, POKEMON, HEALTHUP};
 
     //construtor
     public Card(String anId,String nome, int pok){
@@ -92,6 +93,12 @@ public class Card extends Observable{//carta observavél
                     break;
                 case 10: vida = 12;
                     ataque = 6;
+                    break;
+                case 11: vida = 0;
+                    ataque = 5;
+                    break;
+                case 12: vida = 10;
+                    ataque = 0;
                     break;
 
             }
