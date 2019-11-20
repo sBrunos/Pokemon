@@ -37,19 +37,21 @@ public class GameWindow extends Application implements Observer{
         ScrollPane sd1 = new ScrollPane();
         sd1.setPrefSize(950, 320);
         sd1.setContent(deckJ1);
-        grid.add(sd1,0,0);
+        grid.add(sd1,0,1);
         
         PlacarView placar = new PlacarView();
-        grid.add(placar,0,1);
+        grid.add(placar,1,0);
 
         //Declarar elemento:
-        Button butClean = new Button("Batalhar");
+        Button butBattle = new Button("Batalhar");
+
+        butBattle.setPrefSize(100, 40);
 
         //Adicionar na grid:
-        grid.add(butClean,1,1);
+        grid.add(butBattle,1,2);
 
         //Adicionar ação:
-        butClean.setOnAction(new EventHandler<ActionEvent>() {
+        butBattle.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 Game.getInstance().removeSelected();
