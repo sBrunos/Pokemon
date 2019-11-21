@@ -19,7 +19,7 @@ public class CardDeck extends Observable{
        Random r = new Random();//o Random gera numeros aleatórios
        for(int i=0;i<NCARDS;i++){//sorteia as cartas
            int n = r.nextInt(10)+1;
-           Card c = new Card("C"+n,"img"+n, n);//
+           Card c = new Card(n);//
            c.select();
            cartas.add(c);
        }
