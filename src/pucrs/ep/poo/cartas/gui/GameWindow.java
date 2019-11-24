@@ -25,7 +25,7 @@ public class GameWindow extends Application implements Observer{
     public void start(Stage primaryStage) {
         Game.getInstance().addObserver(this);
         
-        primaryStage.setTitle("POKÉMON");
+        primaryStage.setTitle("POKÉMON-CARDS");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);

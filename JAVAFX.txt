@@ -1,0 +1,47 @@
+start -> recebe um "stage" (janela)
+
+
+JAVAFX:
+
+------------------------------------------------------------------------
+Tipos de PANE (tela) 
+
+-GRID : tem colunas e linhas
+-STACK : nada dms aparentemente
+-BORDER : tem áreas (Top, Bottom, Left, Right)
+
+------------------------------------------------------------------------
+
+Classe Stage:
+	métodos importantes -> setTitle(title da janela)
+			       setScene(objeto da classe Scene com o conteúdo desejado)
+			       show()
+
+Classe Button: 
+	métodos importantes -> setText(texto do botão)
+			       setOnAction(new EventHandler<ActionEvent>()
+					    {
+          					  @Override
+            					public void handle(ActionEvent e) {
+                				  o que vc quiser que aconteça aq
+            					}
+        				    })
+	
+
+Classe StackPane(uma parte da tela que tu pode adicionar coisas e mexer no posicionamento delas)
+	métodos importantes -> getChildren().add(o que tu quer adicionar nele)
+			       setAllignment(alinhameto que tu quer)
+				
+Classe Scene(aparentemente é o conteúdo da janela) 
+	método importante -> construtor(StackPane, largura, altura)
+
+
+Classe ActionEvent
+	métodos importantes -> getSource() fala nome do objeto que ta fazendo a ação
+
+
+Classe BorderPane(tem um top, left, right e bottom bem definidos)
+Classe VBox -> vertical Box, agrupa elementos na vertical
+Classe HBox -> horizontal Box, agrupa elementos na horizontal
+
+Classe GridPane
