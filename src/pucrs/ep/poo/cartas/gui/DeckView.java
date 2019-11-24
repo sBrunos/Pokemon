@@ -13,13 +13,19 @@ public class DeckView extends HBox implements CardObserver,Observer{
 
 
     public DeckView(int nroJog){
+        //Cria uma Horizontal Box, com 4 intens
         super(4);
+        
+        //Posiciona no centro
         this.setAlignment(Pos.CENTER);
         
+        //Declara quem é o jogador e nenhuma carta selecionada
         jogador = nroJog;
         selectedCard = null;
         
         cDeck = null;
+
+        //Dependendo do jogador escolhe o Deck
         if (jogador == 1){
             cDeck = Game.getInstance().getDeckJ1();
         }else{
