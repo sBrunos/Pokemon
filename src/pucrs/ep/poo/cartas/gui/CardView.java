@@ -19,23 +19,21 @@ public class CardView extends Button implements Observer{
         card.addObserver(this);
         thisCard = this;
         
-        this.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
+        this.setOnAction(e -> {
                 if (observer != null){
                     observer.cardSelected(thisCard);
                 }
             }
-        });
+        );
     }
     
     @Override
     public void update(Observable o,Object args){
         if (card.isFacedUp()){
-            this.setGraphic(ImageFactory.getInstance().createImage(card.getId()));
+            this.setGraphic(ImageFactory.getInstance().createImage(card.getNomePokemon()));
         }else{
             this.setGraphic(ImageFactory.getInstance().createImage("imgBck"));
-        }   
+        }
     }
     
     public void setCardObserver(CardObserver obs){

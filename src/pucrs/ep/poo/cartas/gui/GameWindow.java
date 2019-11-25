@@ -45,17 +45,18 @@ public class GameWindow extends Application implements Observer{
         //Declarar elemento:
         Button butBattle = new Button("Batalhar");
 
+        butBattle.setStyle("-fx-background-color: black");
+
         butBattle.setPrefSize(100, 40);
 
         //Adicionar na grid:
         grid.add(butBattle,1,2);
 
         //Adicionar ação:
-        butBattle.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                Game.getInstance().removeSelected();
-            }
+        butBattle.setOnAction(e -> {
+
+            System.out.println(e.getClass());
+            Game.getInstance().removeSelected();
         });
 
         DeckView deckJ2 = new DeckView(2);

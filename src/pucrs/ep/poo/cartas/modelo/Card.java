@@ -40,7 +40,6 @@ public class Card extends Observable{//carta observavél
 
     public void setonBattle(boolean a){ onBattle = a; }
 
-
     public boolean isFacedUp(){
         return(faceUp);
     }//está virada?
@@ -52,9 +51,17 @@ public class Card extends Observable{//carta observavél
             faceUp = true;
         }
         //semelhança
-        setChanged();//
+        setChanged();//select
         notifyObservers();//avisa que a carta virou
         //// houve modificação e ve se alguém está interessada
+    }
+
+    public void setOnBattle(){
+        if (onBattle == true){//vou lutar
+            onBattle = false;
+        }else{
+            onBattle = true;
+        }
     }
     /*public void flip(){//virar a carta
         if (faceUp == true){//fui virada

@@ -37,6 +37,8 @@ public class DeckView extends HBox implements CardObserver,Observer{
             CardView cv = new CardView(card);
             cv.setCardObserver(this);
             this.getChildren().add(cv);
+            if(jogador == 1)
+            card.select();
         }
     }
     
