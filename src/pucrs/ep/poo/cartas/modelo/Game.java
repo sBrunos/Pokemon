@@ -1,6 +1,7 @@
 package pucrs.ep.poo.cartas.modelo;
 
 import pucrs.ep.poo.cartas.gui.GameEvent;
+import pucrs.ep.poo.cartas.gui.TableView;
 
 import java.util.*;
 //classe teste
@@ -42,6 +43,10 @@ public class Game extends Observable{
         for (Card card: deckJ1.getCards()) {
             vida1 += card.getId() == "11" ? 0 : card.getVida();
         }
+
+        deckJ1.getCards().forEach(card -> {
+            vida1 += card.getVida();
+        });
         return(vida1);
     }
 
@@ -69,7 +74,7 @@ public class Game extends Observable{
         GameEvent gameEvent = null;
 
         if (player == 3){//
-                gameEvent = new GameEvent(GameEvent.Target.GWIN,GameEvent.Action.MUSTCLEAN,"");//
+                gameEvent = new GameEvent(GameEvent.Target.GWIN,GameEvent.Action.BATTLETIME,"");//
                 setChanged();//
                 notifyObservers((Object)gameEvent);//
                 return;

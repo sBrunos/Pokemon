@@ -1,8 +1,12 @@
 package pucrs.ep.poo.cartas.modelo;
 
+import javafx.scene.image.ImageView;
+import pucrs.ep.poo.cartas.gui.TableView;
+
 import java.util.ArrayList;
 
 public class Table {
+    private static Table instance = null;
     private PokemonCard pokJog1;
     private PokemonCard pokJog2;
     private SpecialCard esc1;
@@ -85,6 +89,12 @@ public class Table {
 
     }
 
+    public static Table getInstance(){
+        if(instance == null)
+            instance = new Table();
+        return instance;
+    }
+
     public void setVantagem(){
 
         pokJog1.getVantagem().forEach(elemento -> {
@@ -96,4 +106,5 @@ public class Table {
                     pokJog2.addAtaque();
         });
     }
+
 }

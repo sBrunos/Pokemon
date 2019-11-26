@@ -35,12 +35,12 @@ public class GameWindow extends Application implements Observer{
        
         DeckView deckJ1 = new DeckView(1);
         ScrollPane sd1 = new ScrollPane();
-        sd1.setPrefHeight(300);
+        sd1.setPrefWidth(360);
         sd1.setContent(deckJ1);
-        grid.add(sd1,0,0);
+        grid.add(sd1,1,0);
 
-        TableView placar = new TableView();
-        grid.add(placar,0,2);
+        TableView placar = TableView.getInstance();
+        grid.add(placar,2,0);
 
       //  table = new GridPane();
       //  table.setAlignment(Pos.CENTER);
@@ -49,9 +49,9 @@ public class GameWindow extends Application implements Observer{
 
         DeckView deckJ2 = new DeckView(2);
         ScrollPane sd2 = new ScrollPane();
-        sd2.setPrefHeight(300);
+        sd2.setPrefWidth(360);
         sd2.setContent(deckJ2);
-        grid.add(sd2,0,3);
+        grid.add(sd2,3,0);
                 
         Scene scene = new Scene(grid);
         primaryStage.setScene(scene);        
@@ -74,12 +74,13 @@ public class GameWindow extends Application implements Observer{
                     alert.setHeaderText("Jogada inválida!!");
                     alert.setContentText("Era a vez do jogador "+eg.getArg());
                     alert.showAndWait();
+                   // Table.getInstance().battle();
                     break;                    
-                case MUSTCLEAN:
+                case BATTLETIME:
                     alert = new Alert(AlertType.WARNING);
                     alert.setTitle("Atenção !!");
                     alert.setHeaderText(null);
-                    alert.setContentText("Utilize o botao \"Clean\"");
+                    alert.setContentText("Hora de Batalhar!");
                     alert.showAndWait();
                     break;                    
                 case ENDGAME:

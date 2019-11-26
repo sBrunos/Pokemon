@@ -19,7 +19,7 @@ public class CardView extends Button implements Observer{
         card.addObserver(this);
         thisCard = this;
         
-        this.setOnAction(e -> {
+        this.setOnAction(e  -> {
                 if (observer != null){
                     observer.cardSelected(thisCard);
                 }

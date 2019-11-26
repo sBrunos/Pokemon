@@ -28,6 +28,6 @@ public class GameEvent{
     
 public enum Target {DECK,GWIN}
     
-public enum Action {INVPLAY,MUSTCLEAN,ENDGAME,REMOVESEL,SELECTCARD}
+public enum Action {INVPLAY,BATTLETIME,ENDGAME,REMOVESEL,SELECTCARD}
 }
 

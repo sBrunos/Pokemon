@@ -4,9 +4,11 @@ import java.util.*;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import pucrs.ep.poo.cartas.modelo.*;
 
-public class DeckView extends HBox implements CardObserver,Observer{
+
+public class DeckView extends VBox implements CardObserver,Observer{
     private int jogador;
     private CardDeck cDeck;
     private Card selectedCard;
@@ -45,7 +47,11 @@ public class DeckView extends HBox implements CardObserver,Observer{
     @Override
     public void cardSelected(CardView cv){
         cDeck.setSelectedCard(cv.getCard());
+
+        TableView.getInstance().getImagem(cv.getCard().getNomePokemon());
+
         selectedCard = cv.getCard();
+        removeSel();
         Game.getInstance().play(cDeck);
     }
         

@@ -7,7 +7,7 @@ public class PokemonCard extends Card{
     private int vida;
     public enum elemento {FOGO, AGUA, TERRA, VOADOR, GRAMA, NORMAL, VENENO, ELETRICO, PEDRA, INSETO};
     private elemento e;
-    private ArrayList<elemento> vantagem;
+    private ArrayList<elemento> vantagem ;
     private boolean morto = false;
 
     public PokemonCard(int n) {
@@ -22,6 +22,7 @@ public class PokemonCard extends Card{
     public elemento getTipo() { return e; }
 
     public void setAttributes(int id){
+        vantagem = new ArrayList<>();
         if(id< 11 && id > 0){
             switch (id){
                 case 1: super.setVida(10);
