@@ -35,29 +35,12 @@ public class GameWindow extends Application implements Observer{
        
         DeckView deckJ1 = new DeckView(1);
         ScrollPane sd1 = new ScrollPane();
-        sd1.setPrefSize(950, 320);
+        sd1.setPrefHeight(300);
         sd1.setContent(deckJ1);
         grid.add(sd1,0,0);
 
         TableView placar = new TableView();
-        grid.add(placar,1,0);
-
-        //Declarar elemento:
-        Button butBattle = new Button("Batalhar");
-
-        butBattle.setStyle("-fx-background-color: black");
-
-        butBattle.setPrefSize(100, 40);
-
-        //Adicionar na grid:
-        grid.add(butBattle,1,2);
-
-        //Adicionar ação:
-        butBattle.setOnAction(e -> {
-
-            System.out.println(e.getClass());
-            Game.getInstance().removeSelected();
-        });
+        grid.add(placar,0,2);
 
       //  table = new GridPane();
       //  table.setAlignment(Pos.CENTER);
@@ -66,9 +49,9 @@ public class GameWindow extends Application implements Observer{
 
         DeckView deckJ2 = new DeckView(2);
         ScrollPane sd2 = new ScrollPane();
-        sd2.setPrefSize(950, 320);
+        sd2.setPrefHeight(300);
         sd2.setContent(deckJ2);
-        grid.add(sd2,0,2);
+        grid.add(sd2,0,3);
                 
         Scene scene = new Scene(grid);
         primaryStage.setScene(scene);        

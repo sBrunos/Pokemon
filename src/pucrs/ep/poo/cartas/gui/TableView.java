@@ -3,6 +3,7 @@ package pucrs.ep.poo.cartas.gui;
 import java.util.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -18,6 +19,19 @@ public class TableView extends GridPane implements Observer{
         this.setPadding(new Insets(25, 25, 25, 25));
 
         Game.getInstance().addObserver(this);
+        //Declarar elemento:
+        Button butBattle = new Button("Batalhar");
+
+        butBattle.setStyle("-fx-background-color: black");
+
+        butBattle.setPrefSize(100, 40);
+
+
+        //Adicionar ação:
+        butBattle.setOnAction(e -> {
+            System.out.println(e.getClass());
+            Game.getInstance().removeSelected();
+        });
 
         vida1 = new TextField();
         vida2 = new TextField();
@@ -27,8 +41,9 @@ public class TableView extends GridPane implements Observer{
 
         this.add(new Label("Vida do jogador 1:"),0,0);
         this.add(vida1,1,0);
-        this.add(new Label("Vida do jogador 2:"),0,1);
-        this.add(vida2,1,1);
+        this.add(butBattle,2,0);
+        this.add(new Label("Vida do jogador 2:"),3,0);
+        this.add(vida2,4,0);
     }
 
     @Override
