@@ -22,6 +22,14 @@ public class Table {
         return esc2;
     }
 
+    public int getVida1() {
+        return pokJog1.getVida();
+    }
+
+    public int getVida2() {
+        return pokJog2.getVida();
+    }
+
     public void setEsc1(SpecialCard esc1) {
         this.esc1 = esc1;
     }
@@ -44,10 +52,23 @@ public class Table {
         int vida1 = pokJog1.getVida();
         int vida2 = pokJog2.getVida();
 
-        if (esc1 != null || esc2 != null){
+        if (esc1 != null && esc2 != null){
             atak1 += esc1.getId() == "11" ? esc1.getAtaque() : esc2.getId() == "12" ? esc2.getVida() : 0;
             atak2 += esc2.getId() == "11" ? esc2.getAtaque() : esc1.getId() == "12" ? esc1.getVida() : 0;
         }
+        else if (esc1 != null ){
+            atak1 += esc1.getId() == "11" ? esc1.getAtaque() : 0;
+            atak2 += esc1.getId() == "12" ? esc1.getVida() : 0;
+        }
+        else if (esc2 != null){
+            atak1 += esc2.getId() == "12" ? esc2.getVida() : 0;
+            atak2 += esc2.getId() == "11" ? esc2.getAtaque() : 0;
+        }
 
+        vida1 -= atak2;
+        vida2 -= atak1;
+
+        pokJog1.setVida(vida1);
+        pokJog2.setVida(vida2);
     }
 }

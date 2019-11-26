@@ -8,15 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import pucrs.ep.poo.cartas.modelo.Game;
 
-public class PlacarView extends GridPane implements Observer{
+public class TableView extends GridPane implements Observer{
     private TextField vida1,vida2;
-    
-    public PlacarView(){
+
+    public TableView(){
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
         this.setVgap(10);
         this.setPadding(new Insets(25, 25, 25, 25));
-        
+
         Game.getInstance().addObserver(this);
 
         vida1 = new TextField();
@@ -30,11 +30,11 @@ public class PlacarView extends GridPane implements Observer{
         this.add(new Label("Vida do jogador 2:"),0,1);
         this.add(vida2,1,1);
     }
-    
+
     @Override
     public void update(Observable o,Object arg){
         vida1.setText(""+Game.getInstance().getvida1());
         vida2.setText(""+Game.getInstance().getvida2());
-    }    
+    }
 }
 

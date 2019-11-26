@@ -8,17 +8,19 @@ import java.util.*;
 //
 public class Game extends Observable{
     private static Game game = new Game();//coleções/simbotol()instancia da classe
-    private CardDeck deckJ1,deckJ2;//2 pessoas
+    private CardDeck deckJ1, deckJ2;//2 pessoas
     private int player;//que tem na vez
     private int jogadas;//qtas já jogou
     private int vida1;
     private int vida2;
+    private Table table;
     
     private Game(){//constru privat
         deckJ1 = new CardDeck();//distribui as cartas deckJ1 = new CardDeck(baralho 1);
         deckJ2 = new CardDeck();//baralho 2 deckJ2 = new CardDeck(baralho 2);
         player = 1;//o jogador 1 é o primeiro a jogar
         jogadas = CardDeck.NCARDS;//10 rodadas
+        table = new Table();
     }
     
     public static Game getInstance(){
@@ -37,12 +39,19 @@ public class Game extends Observable{
     }
 
     public int getvida1(){
+        for (Card card: deckJ1.getCards()) {
+            vida1 += card.getId() == "11" ? 0 : card.getVida();
+        }
         return(vida1);
     }
 
     public int getvida2(){
+        for (Card card: deckJ2.getCards()) {
+            vida2 += card.getId() == "11" ? 0 : card.getVida();
+        }
         return(vida2);
     }
+
     public void setvida1(int vida){
         vida1 = vida;
     }

@@ -37,9 +37,9 @@ public class GameWindow extends Application implements Observer{
         ScrollPane sd1 = new ScrollPane();
         sd1.setPrefSize(950, 320);
         sd1.setContent(deckJ1);
-        grid.add(sd1,0,1);
-        
-        PlacarView placar = new PlacarView();
+        grid.add(sd1,0,0);
+
+        TableView placar = new TableView();
         grid.add(placar,1,0);
 
         //Declarar elemento:
@@ -58,6 +58,11 @@ public class GameWindow extends Application implements Observer{
             System.out.println(e.getClass());
             Game.getInstance().removeSelected();
         });
+
+      //  table = new GridPane();
+      //  table.setAlignment(Pos.CENTER);
+      //  table.setPrefSize(950, 150);
+      //  table.add(placar, 1, 0);
 
         DeckView deckJ2 = new DeckView(2);
         ScrollPane sd2 = new ScrollPane();
