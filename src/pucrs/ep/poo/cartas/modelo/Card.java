@@ -2,18 +2,19 @@ package pucrs.ep.poo.cartas.modelo;
 
 import java.util.*;
 
-public class Card extends Observable{//carta observavél
+public abstract class Card extends Observable{//carta observavél
     private String id;
     private String nomePokemon;//nome da imagem
     private int vida;
     private int ataque;
-    private boolean faceUp; //carta virada ou não
+    public enum Face {UP, DOWN}; //carta virada ou não
+    private Face face;
     private boolean onBattle; //carta em campo ou não
 
     public Card(int n){
         id = "C" + n;
         nomePokemon = "img" + n;
-        faceUp = false;
+        face = Face.DOWN;
     }
     
     public String getId(){
@@ -38,26 +39,18 @@ public class Card extends Observable{//carta observavél
 
     public void setAtaque(int a){ ataque = a; }
 
-    public void setonBattle(boolean a){ onBattle = a; }
-
     public boolean isFacedUp(){
-        return(faceUp);
+        return face == Face.UP ? true : false;
     }//está virada?
     
-    public void select(){//virar a carta
-        if (faceUp == true){//fui virada
-            faceUp = false;
-        }else{
-            faceUp = true;
-        }
+    public void flip(Face f){ face = f; setChanged(); notifyObservers(); }//avisa que a carta virou
         //semelhança
-        setChanged();//select
-        notifyObservers();//avisa que a carta virou
-        //// houve modificação e ve se alguém está interessada
-    }
+      //  //select
+
+    //}
 
     public void setOnBattle(){
-        if (onBattle == true){//vou lutar
+        if (onBattle == true){
             onBattle = false;
         }else{
             onBattle = true;

@@ -3,8 +3,6 @@ package pucrs.ep.poo.cartas.modelo;
 import java.util.ArrayList;
 
 public class PokemonCard extends Card{
-    private int ataque;
-    private int vida;
     public enum elemento {FOGO, AGUA, TERRA, VOADOR, GRAMA, NORMAL, VENENO, ELETRICO, PEDRA, INSETO};
     private elemento e;
     private ArrayList<elemento> vantagem ;
@@ -97,11 +95,11 @@ public class PokemonCard extends Card{
         vantagem.add(tipo);
     }
 
-    public void addAtaque(){
-        ataque += 5;
-    }
-
     public void setMorto(boolean morto) {
         this.morto = morto;
+    }
+
+    public boolean getMorto() {
+        return morto;
     }
 }

@@ -11,8 +11,11 @@ public class SpecialCard extends Card{
             switch (id){
                 case 11:
                     super.setAtaque(5);
+                    super.setVida(0);
                     break;
-                case 12: super.setVida(10);
+                case 12:
+                    super.setAtaque(0);
+                    super.setVida(10);
                     break;
             }
         }

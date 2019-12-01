@@ -3,7 +3,8 @@ package pucrs.ep.poo.cartas.gui;
 public class GameEvent{
         private Target target;;
         private Action action;;
-    private String arg;
+        private String arg;
+
     public GameEvent(Target aTarget,Action anAction,String anArg){
         target = aTarget;
         action = anAction;
@@ -28,6 +29,6 @@ public class GameEvent{
     
 public enum Target {DECK,GWIN}
     
-public enum Action {INVPLAY,BATTLETIME,ENDGAME,REMOVESEL,SELECTCARD}
+public enum Action {INVPLAY,BATTLETIME,ENDGAME,REMOVESEL,SELECTCARD,}
 }
 

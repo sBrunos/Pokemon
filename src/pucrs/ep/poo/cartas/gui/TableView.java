@@ -9,17 +9,22 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import pucrs.ep.poo.cartas.modelo.CardObserver;
-import pucrs.ep.poo.cartas.modelo.Game;
-import pucrs.ep.poo.cartas.modelo.ImageFactory;
+import pucrs.ep.poo.cartas.modelo.*;
 
 public class TableView extends GridPane implements Observer {
     private Label vida1,vida2;
+    private Table table;
     private static TableView instance = null;
-    private Button pane1;
-    private Button pane2;
+    private Button pane1, pane2;
+    private int vidaP1, vidaP2;
+    GridPane placar;
+    Button butBattle;
+
+
     private TableView(){
-        GridPane placar = new GridPane();
+        Table.getInstance().addObserver(this);
+        placar = new GridPane();
+        table = Table.getInstance();
 
         placar.setAlignment(Pos.TOP_CENTER);
         placar.setHgap(10);
@@ -28,31 +33,31 @@ public class TableView extends GridPane implements Observer {
         //this.setStyle("-fx-background-color: blue");
         Game.getInstance().addObserver(this);
         //Declarar elemento:
-        Button butBattle = new Button("Batalhar");
+
+        butBattle = new Button("Batalhar");
 
         butBattle.setPrefSize(100, 40);
 
-
         //Adicionar ação:
-        butBattle.setOnAction(e -> {
-            System.out.println(e.getClass());
-            Game.getInstance().removeSelected();
-        });
+        if(Game.getInstance().getPlayer() == 3) {
+            butBattle.setOnAction(e -> {
+                table.battle();
+            });
+        }
+        else {
+            butBattle.setOnAction(null);
+        }
 
         vida1 = new Label();
         vida2 = new Label();
 
-
-
         vida1.setText(""+Game.getInstance().getvida1());
         vida2.setText(""+Game.getInstance().getvida2());
 
-        placar.add(new Label("Vida do jogador 1:"),0,0);
         placar.add(vida1,1,0);
+        // if (table.getPokJog1() != null && table.getPokJog2() != null)
         placar.add(butBattle,2,0);
-        placar.add(new Label("Vida do jogador 2:"),3,0);
-        placar.add(vida2,4,0);
-
+        placar.add(vida2,3,0);
 
         GridPane cartas = new GridPane();
         cartas.setAlignment(Pos.BOTTOM_CENTER);
@@ -63,8 +68,8 @@ public class TableView extends GridPane implements Observer {
         pane2 = new Button();
 
 
-        pane1.setStyle("-fx-background-color: red");
-        pane2.setStyle("-fx-background-color: black");
+        pane1.setStyle("-fx-background-color: #dedccc");
+        pane2.setStyle("-fx-background-color: #ceccbc");
 
         //Largura da mesa
         pane1.setMinWidth(300);
@@ -88,16 +93,35 @@ public class TableView extends GridPane implements Observer {
         return instance;
     }
 
-
-    public void getImagem(String id){
-        pane1.setGraphic(ImageFactory.getInstance().createImage(id));
+    public void setImagem(CardView cardV, int jogador){
+        Card card = cardV.getCard();
+        if (jogador == 1){
+            if( card instanceof PokemonCard ) {
+                table.setPokJog1((PokemonCard) card);
+                pane1.setGraphic(ImageFactory.getInstance().createImage(card.getNomePokemon()));
+            }
+        }else{
+            if( card instanceof PokemonCard ) {
+                table.setPokJog2((PokemonCard) card);
+                pane2.setGraphic(ImageFactory.getInstance().createImage(card.getNomePokemon()));
+            }
+        }
     }
+
+    public void setVida1(int vida) {vidaP1 = vida;}
+
+    public void setVida2(int vida) {vidaP2 = vida;}
+    //public Table getTable() { return table; }
 
     @Override
     public void update(Observable o,Object arg){
-        vida1.setText(""+Game.getInstance().getvida1());
-        vida2.setText(""+Game.getInstance().getvida2());
+        vida1.setText("a"+Game.getInstance().getvida1() + vidaP1);
+        vida2.setText(""+Game.getInstance().getvida2() + vidaP2);
 
+        if (Table.getInstance().getPokJog1() == null)
+            pane1.setGraphic(null);
+        if (Table.getInstance().getPokJog2() == null)
+            pane2.setGraphic(null);
     }
 }
 

@@ -10,9 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.event.*;
 import pucrs.ep.poo.cartas.modelo.Game;
+import sun.swing.MenuItemLayoutHelper;
+
+import javax.swing.*;
 
 
 public class GameWindow extends Application implements Observer{
@@ -34,8 +38,10 @@ public class GameWindow extends Application implements Observer{
         grid.setPadding(new Insets(25, 25, 25, 25));
        
         DeckView deckJ1 = new DeckView(1);
+   //     if(Game.getInstance().getPlayer() == 2)
+   //         deckJ2.flipCards();
         ScrollPane sd1 = new ScrollPane();
-        sd1.setPrefWidth(360);
+        sd1.setPrefWidth(300);
         sd1.setContent(deckJ1);
         grid.add(sd1,1,0);
 
@@ -48,8 +54,10 @@ public class GameWindow extends Application implements Observer{
       //  table.add(placar, 1, 0);
 
         DeckView deckJ2 = new DeckView(2);
+     //   if(Game.getInstance().getPlayer() == 2)
+     //       deckJ2.flipCards();
         ScrollPane sd2 = new ScrollPane();
-        sd2.setPrefWidth(360);
+        sd2.setPrefWidth(300);
         sd2.setContent(deckJ2);
         grid.add(sd2,3,0);
                 
@@ -61,7 +69,7 @@ public class GameWindow extends Application implements Observer{
     @Override
     public void update(Observable o,Object arg){
         Alert alert;
-        
+
         if (arg == null){
             return;
         }
@@ -85,11 +93,11 @@ public class GameWindow extends Application implements Observer{
                     break;                    
                 case ENDGAME:
                     alert = new Alert(AlertType.WARNING);
-                    alert.setTitle("Atenção !!");
+                    alert.setTitle("Fim de Jogo !!");
                     alert.setHeaderText(null);
-                    alert.setContentText("Fim de Jogo !!");
+                    alert.setContentText("Vencedor: Jogador ");
                     alert.showAndWait();
-                    break;                    
+                    break;
             }
         }
     }

@@ -30,31 +30,36 @@ public class DeckView extends VBox implements CardObserver,Observer{
         //Dependendo do jogador escolhe o Deck
         if (jogador == 1){
             cDeck = Game.getInstance().getDeckJ1();
+
         }else{
             cDeck = Game.getInstance().getDeckJ2();
         }
+
         cDeck.addObserver(this);
         
         for(Card card:cDeck.getCards()){
-            CardView cv = new CardView(card);
+            CardView cv = new CardView(card, jogador);
             cv.setCardObserver(this);
             this.getChildren().add(cv);
-            if(jogador == 1)
-            card.select();
+        }
+        if (jogador == 1) {
+            cDeck.flipCards(Card.Face.UP);
         }
     }
     
     @Override
     public void cardSelected(CardView cv){
-        cDeck.setSelectedCard(cv.getCard());
+            cDeck.setSelectedCard(cv.getCard());
 
-        TableView.getInstance().getImagem(cv.getCard().getNomePokemon());
+            TableView.getInstance().setImagem(cv, jogador);
 
-        selectedCard = cv.getCard();
-        removeSel();
-        Game.getInstance().play(cDeck);
+            selectedCard = cv.getCard();
+            selectedCard.setOnBattle();
+
+            removeSel();
+            Game.getInstance().play();
     }
-        
+
     private void removeSel(){
         List cards = getChildren();
         for(int i=0;i<cards.size();i++){
@@ -63,7 +68,11 @@ public class DeckView extends VBox implements CardObserver,Observer{
                 getChildren().remove(cv);
                 selectedCard = null;
             }
-        }      
+        }
+        if (jogador == 1)
+            Game.getInstance().setDeck1(cDeck);
+        else
+            Game.getInstance().setDeck2(cDeck);
     }
     
     @Override

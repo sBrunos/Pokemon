@@ -16,12 +16,18 @@ public class CardDeck extends Observable{
     public CardDeck(){
        cartas = new ArrayList<Card>(NCARDS);//5
        selected = null;
+       PokemonCard p;
+       SpecialCard s;
        Random r = new Random();//o Random gera numeros aleatórios
        for(int i=0;i<NCARDS;i++){//sorteia as cartas
-           int n = r.nextInt(10)+1;
-           PokemonCard c = new PokemonCard(n);//
-           c.select();
-           cartas.add(c);
+           int n = r.nextInt(12)+1;
+           if (n < 11){
+                p = new PokemonCard(n);
+               cartas.add(p);
+            }else{
+               s = new SpecialCard(n);
+               cartas.add(s);
+           }
        }
     }
         
@@ -42,18 +48,14 @@ public class CardDeck extends Observable{
         GameEvent gameEvent = new GameEvent(GameEvent.Target.DECK,GameEvent.Action.REMOVESEL,"");
         setChanged();
         notifyObservers(gameEvent);//avisou que exemplo "a carta 10 foi tirada"
-    }    
+    }
 
-    public int getVidaTotal(){
+    public void flipCards(Card.Face f) {
+        cartas.forEach( card -> {
+            card.flip(f);
+        });
+    }
 
-        int vidaTotal = 0;
-
-        for ( Card i : cartas ) {
-            vidaTotal += i.getVida();
-        }
-
-        return vidaTotal;
-    };
     public Card getSelectedCard(){
         return(selected);
     }//pergunta se a carta está selecionada
