@@ -17,37 +17,25 @@ public abstract class Card extends Observable{//carta observavél
         face = Face.DOWN;
     }
     
-    public String getId(){
-        return(id);
-    }
+    public String getId(){ return id; }
     
     public String getNomePokemon(){
-        return(nomePokemon);
+        return nomePokemon;
     }
     
-    public int getVida(){
-        return(vida);
-    }
+    public int getVida(){ return vida; }
 
-    public int getAtaque(){
-        return(ataque);
-    }
+    public int getAtaque(){ return ataque; }
 
-    public void setVida(int v){
-        vida = v;
-    }
+    public void setVida(int v){ vida = v; }
 
     public void setAtaque(int a){ ataque = a; }
 
-    public boolean isFacedUp(){
+    public boolean isFacedUp(){ //está virada?
         return face == Face.UP ? true : false;
-    }//está virada?
+    }
     
-    public void flip(Face f){ face = f; setChanged(); notifyObservers(); }//avisa que a carta virou
-        //semelhança
-      //  //select
-
-    //}
+    public void flip(Face f){ face = f; setChanged(); notifyObservers(); }
 
     public void setOnBattle(){
         if (onBattle == true){
@@ -56,19 +44,6 @@ public abstract class Card extends Observable{//carta observavél
             onBattle = true;
         }
     }
-    /*public void flip(){//virar a carta
-        if (faceUp == true){//fui virada
-            faceUp = false;
-        }else{
-            faceUp = true;
-        }
-        //semelhança
-        setChanged();//
-        notifyObservers();//avisa que a carta virou
-        //// houve modificação e ve se alguém está interessada
-    }*/
-
-
 }
         
 

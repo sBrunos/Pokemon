@@ -24,7 +24,7 @@ public class CardDeck extends Observable{
            if (n < 11){
                 p = new PokemonCard(n);
                cartas.add(p);
-            }else{
+           }else{
                s = new SpecialCard(n);
                cartas.add(s);
            }
@@ -38,6 +38,8 @@ public class CardDeck extends Observable{
     public int getNumberOfCards(){
         return(cartas.size());
     }//quantidade
+
+    public boolean isEmpty() { return cartas == null || cartas.size() == 0 ? true : false; }
     
     public void removeSel(){
         if (selected == null){//remove

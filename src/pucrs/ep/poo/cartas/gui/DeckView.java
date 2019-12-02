@@ -51,7 +51,7 @@ public class DeckView extends VBox implements CardObserver,Observer{
     public void cardSelected(CardView cv){
             cDeck.setSelectedCard(cv.getCard());
 
-            TableView.getInstance().setImagem(cv, jogador);
+            Table.getInstance().setCard(cv, jogador);
 
             selectedCard = cv.getCard();
             selectedCard.setOnBattle();

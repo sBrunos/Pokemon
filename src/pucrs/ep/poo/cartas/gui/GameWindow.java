@@ -95,7 +95,7 @@ public class GameWindow extends Application implements Observer{
                     alert = new Alert(AlertType.WARNING);
                     alert.setTitle("Fim de Jogo !!");
                     alert.setHeaderText(null);
-                    alert.setContentText("Vencedor: Jogador ");
+                    alert.setContentText("Vencedor: Jogador " + (Game.getInstance().allPokDead2() ? "1" : "2"));
                     alert.showAndWait();
                     break;
             }

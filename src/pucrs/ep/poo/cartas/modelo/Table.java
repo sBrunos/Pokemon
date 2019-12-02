@@ -1,6 +1,7 @@
 package pucrs.ep.poo.cartas.modelo;
 
 import javafx.scene.image.ImageView;
+import pucrs.ep.poo.cartas.gui.CardView;
 import pucrs.ep.poo.cartas.gui.TableView;
 
 import java.util.ArrayList;
@@ -9,39 +10,62 @@ import java.util.Observable;
 public class Table extends Observable {
     private static Table instance = null;
     private PokemonCard pokJog1, pokJog2;
-    private SpecialCard esc1, esc2;
+    private SpecialCard espJ1, espJ2;
+    public enum BattleMode {ON, OFF};
+    private BattleMode battleMode;
+    private int pokStart;
 
-    public Table(){}
+    public Table(){battleMode  = BattleMode.OFF; pokStart = 1;}
 
     public PokemonCard getPokJog1() { return pokJog1; }
 
     public PokemonCard getPokJog2() { return pokJog2; }
 
-    public SpecialCard getEsc1() {  return esc1; }
+    public SpecialCard getEspJ1() {  return espJ1; }
 
-    public SpecialCard getEsc2() {
-        return esc2;
-    }
+    public SpecialCard getEspJ2() { return espJ2; }
 
-    public int getVida1() {
-        return pokJog1 != null ? pokJog1.getVida() : 0;
-    }
+    public int getVida1() { return pokJog1 != null ? pokJog1.getVida() : 0; }
 
-    public int getVida2() {
-        return pokJog2 != null ? pokJog2.getVida() : 0;
-    }
+    public int getVida2() { return pokJog2 != null ? pokJog2.getVida() : 0; }
 
-    public void setEsc1(SpecialCard esc1) {
-        this.esc1 = esc1;
-    }
+    public int getAtaque1() { return pokJog1 != null ? pokJog1.getAtaque() : 0; }
 
-    public void setEsc2(SpecialCard esc2) {
-        this.esc2 = esc2;
+    public int getAtaque2() { return pokJog2 != null ? pokJog2.getAtaque() : 0; }
+
+    public void setCard(CardView cv, int jogador){
+        Card card = cv.getCard();
+        if( card instanceof PokemonCard ){
+            if (jogador == 1){
+                pokJog1 = (PokemonCard) card;
+                if (espJ1 != null){
+                        espJ1.setEfect(pokJog1);
+                }
+            } else{
+                pokJog2 = (PokemonCard) card;
+                if (espJ2 != null){
+                        espJ2.setEfect(pokJog2);
+                }
+            }
+        } else {
+            if (jogador == 1)
+                espJ1 = (SpecialCard) card;
+            else
+                espJ2 = (SpecialCard) card;
+        }
+        if(card instanceof PokemonCard)
+            TableView.getInstance().setImagem(cv, jogador);
+
+        setChanged(); notifyObservers();
     }
 
     public void setPokJog1(PokemonCard pokJog) { pokJog1 = pokJog; }
 
     public void setPokJog2(PokemonCard pokJog) { pokJog2 = pokJog; }
+
+    public void setBattleMode(BattleMode m) { battleMode = m; }
+
+    public boolean inBattleMode() { return battleMode == BattleMode.ON ? true : false; }
 
     public int getVencedor() {
         return pokJog1.getMorto() && Game.getInstance().getDeck2Size() > 0 ? 2 :
@@ -55,51 +79,58 @@ public class Table extends Observable {
     }
 
     public void battle(){
-        int atak1 = pokJog1.getAtaque();
-        int atak2 = pokJog2.getAtaque();
-        int vida1 = pokJog1.getVida();
-        int vida2 = pokJog2.getVida();
+        if (inBattleMode()) {
 
-        int vidaAtual1;
-        int vidaAtual2;
-        int[] vantagens = getVantagens();
+            int atak1 = pokJog1.getAtaque();
+            int atak2 = pokJog2.getAtaque();
+            int vida1 = pokJog1.getVida();
+            int vida2 = pokJog2.getVida();
 
-        //Verifica se tem alguma carta especial:
-        if (esc1 != null || esc2 != null){
-            atak1 += esc1.getId() == "11" ? esc1.getAtaque() : esc2.getId() == "12" ? esc2.getVida() : 0;
-            atak2 += esc2.getId() == "11" ? esc2.getAtaque() : esc1.getId() == "12" ? esc1.getVida() : 0;
+            int vidaAtual1;
+            int vidaAtual2;
+            int[] vantagens = getVantagens();
+
+            //Adiciona ataque no pokemon que tem vantagem:
+            atak1 += vantagens[0] * 5;
+            atak2 += vantagens[1] * 5;
+
+            //setVantagem();
+            if (pokStart == 1) {
+                vidaAtual2 = vida2 - atak1;
+                vidaAtual1 = vidaAtual2 > 0 ? vida1 - atak2 : vida1;
+            }
+            else {
+                vidaAtual1 = vida1 - atak2;
+                vidaAtual2 = vidaAtual1 > 0 ? vida2 - atak1 : vida2;
+            }
+
+            pokJog1.setVida(vidaAtual1);
+            pokJog2.setVida(vidaAtual2);
+
+            if (vidaAtual1 <= 0){
+                pokJog1 = null;
+                battleMode = BattleMode.OFF;
+            }
+            if (vidaAtual2 <= 0) {
+                pokJog2 = null;
+                battleMode = BattleMode.OFF;
+            }
+
+            //Define o pokemon a atacar primeiro no próximo battle
+            pokStart = vidaAtual1 <= 0 ? 1 : vidaAtual2 <= 0 ? 2 : pokStart == 1 ? 2 : 1;
+
+            if (vidaAtual1 <= 0)
+                espJ1 = null;
+
+            if (vidaAtual2 <= 0)
+                espJ2 = null;
+
+            Game.getInstance().play();
+
+            setChanged();
+            notifyObservers();
+
         }
-        else if (esc1 != null ){
-            atak1 += esc1.getId() == "11" ? esc1.getAtaque() : 0;
-            atak2 += esc1.getId() == "12" ? esc1.getVida() : 0;
-        }
-        else if (esc2 != null){
-            atak1 += esc2.getId() == "12" ? esc2.getVida() : 0;
-            atak2 += esc2.getId() == "11" ? esc2.getAtaque() : 0;
-        }
-
-        //Adiciona ataque no pokemon que tem vantagem:
-        atak1 += vantagens[0]*5;
-        atak2 += vantagens[1]*5;
-
-        //setVantagem();
-
-        vidaAtual1 = vida1 - atak2;
-        vidaAtual2 = vida2 - atak1;
-
-        pokJog1.setVida(vidaAtual1);
-        pokJog2.setVida(vidaAtual2);
-
-        if(vidaAtual1 <= 0)
-            pokJog1 = null;
-        if(vidaAtual2 <= 0)
-            pokJog2 = null;
-        //if(vidaAtual1 <= 0)pokJog1.setMorto(true);
-System.out.println("BATTLE");
-        //if(vidaAtual2 <= 0)pokJog2.setMorto(true);
-        Game.getInstance().play();
-        TableView.getInstance().setVida1(vidaAtual1);
-        TableView.getInstance().setVida2(vidaAtual2);
 
     }
 

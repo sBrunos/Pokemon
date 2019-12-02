@@ -16,7 +16,6 @@ public class Game extends Observable{
     private Game(){//constru privat
         deckJ1 = new CardDeck();//distribui as cartas deckJ1 = new CardDeck(baralho 1);
         deckJ2 = new CardDeck();//baralho 2 deckJ2 = new CardDeck(baralho 2);
-        player = 1;//o jogador 1 é o primeiro a jogar
     }
     
     public static Game getInstance(){
@@ -25,7 +24,7 @@ public class Game extends Observable{
     
     private void nextPlayer(){
         player++;
-        if (player == 4){//ou if (player == 3){tem que ver
+        if (player == 3){//ou if (player == 3){tem que ver
             player = 1;
         }
         if (player == 1)
@@ -42,18 +41,26 @@ public class Game extends Observable{
     public int getvida1(){
         int vida1 = 0;
         for(Card card : deckJ1.getCards()){
-            vida1 += card.getVida();
+            if (card instanceof PokemonCard)
+                vida1 += card.getVida();
         }
-        return(vida1);
+        vida1 += Table.getInstance().getVida1();
+        return(vida1 < 0 ? 0 : vida1);
     }
 
     public int getvida2(){
         int vida2 = 0;
-        for(Card card : deckJ1.getCards()){
-            vida2 += card.getVida();
+        for(Card card : deckJ2.getCards()){
+            if (card instanceof PokemonCard)
+                vida2 += card.getVida();
         }
-        return(vida2);
+        vida2 += Table.getInstance().getVida2();
+        return(vida2 < 0 ? 0 : vida2);
     }
+
+    public boolean allPokDead1() { return getvida1() == 0 ? true : false;  }
+
+    public boolean allPokDead2(){ return getvida2() == 0 ? true : false;  }
 
     public int getDeck1Size() {return deckJ1.getCards().size();}
 
@@ -78,21 +85,37 @@ public class Game extends Observable{
     public void play(){//fazer a jogada
         GameEvent gameEvent = null;
 
+        if (allPokDead1() || allPokDead2() ){//
+            gameEvent = new GameEvent(GameEvent.Target.GWIN,GameEvent.Action.ENDGAME, "");//
+            setChanged();//
+            notifyObservers((Object)gameEvent);//
+            deckJ1.flipCards(Card.Face.UP);
+            deckJ2.flipCards(Card.Face.UP);
+            return;
+        }
+
         if(Table.getInstance().getPokJog1() != null && Table.getInstance().getPokJog2() != null){
-            player = 3;
+            Table.getInstance().setBattleMode(Table.BattleMode.ON);
             deckJ1.flipCards(Card.Face.DOWN);
             deckJ2.flipCards(Card.Face.DOWN);
         } else if(Table.getInstance().getPokJog1() != null){
             player = 2;
             deckJ2.flipCards(Card.Face.UP);
+            deckJ1.flipCards(Card.Face.DOWN);
         } else if(Table.getInstance().getPokJog2() != null){
             player = 1;
-            deckJ1.flipCards(Card.Face.UP);
+            deckJ1.flipCards(Card.Face.UP);;
+            deckJ2.flipCards(Card.Face.DOWN);
         }else{
             player = 1;
             deckJ1.flipCards(Card.Face.UP);
             deckJ2.flipCards(Card.Face.DOWN);
+
         }
+
+
+        //setChanged();
+        //notifyObservers();
 
         /*
         if (player == 3){//
@@ -140,7 +163,5 @@ public class Game extends Observable{
 
         deckJ1.removeSel();
         deckJ2.removeSel();
-
-        nextPlayer();
     }
 }
