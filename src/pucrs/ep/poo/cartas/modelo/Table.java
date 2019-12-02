@@ -25,7 +25,11 @@ public class Table extends Observable {
 
     public SpecialCard getEspJ2() { return espJ2; }
 
+    //public int getVida1() { return pokJog1 != null ? pokJog1.getVida() : 0; }
+
     public int getVida1() { return pokJog1 != null ? pokJog1.getVida() : 0; }
+
+    //public int getVida2() { return pokJog2 != null ? pokJog2.getVida() : 0; }
 
     public int getVida2() { return pokJog2 != null ? pokJog2.getVida() : 0; }
 
@@ -100,8 +104,26 @@ public class Table extends Observable {
                 vidaAtual1 = vidaAtual2 > 0 ? vida1 - atak2 : vida1;
             }
             else {
-                vidaAtual1 = vida1 - atak2;
-                vidaAtual2 = vidaAtual1 > 0 ? vida2 - atak1 : vida2;
+                if(vida1 < atak2){
+                    vidaAtual1 = 0;
+                }else{
+
+                    vidaAtual1 = vida1 - atak2;
+                }
+
+                if(vidaAtual1 > 0){
+                    if(vida2 < atak1){
+                        vidaAtual2 = 0;
+                    }
+                    else{
+                        vidaAtual2 = vida2 - atak1;
+
+                    }
+                }
+                else{
+                    vidaAtual2 =  vida2;
+
+                }
             }
 
             pokJog1.setVida(vidaAtual1);

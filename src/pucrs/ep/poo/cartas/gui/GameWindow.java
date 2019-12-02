@@ -35,13 +35,13 @@ public class GameWindow extends Application implements Observer{
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setPadding(new Insets(25, 0, 25, 0));
        
         DeckView deckJ1 = new DeckView(1);
    //     if(Game.getInstance().getPlayer() == 2)
    //         deckJ2.flipCards();
         ScrollPane sd1 = new ScrollPane();
-        sd1.setPrefWidth(300);
+        sd1.setPrefWidth(350);
         sd1.setContent(deckJ1);
         grid.add(sd1,1,0);
 
@@ -57,7 +57,7 @@ public class GameWindow extends Application implements Observer{
      //   if(Game.getInstance().getPlayer() == 2)
      //       deckJ2.flipCards();
         ScrollPane sd2 = new ScrollPane();
-        sd2.setPrefWidth(300);
+        sd2.setPrefWidth(350);
         sd2.setContent(deckJ2);
         grid.add(sd2,3,0);
                 

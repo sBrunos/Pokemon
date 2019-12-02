@@ -42,7 +42,10 @@ public class Game extends Observable{
         int vida1 = 0;
         for(Card card : deckJ1.getCards()){
             if (card instanceof PokemonCard)
-                vida1 += card.getVida();
+                if(deckJ1.getSelectedCard() != card){
+                    vida1 += card.getVida();
+                }
+
         }
         vida1 += Table.getInstance().getVida1();
         return(vida1 < 0 ? 0 : vida1);
@@ -52,13 +55,19 @@ public class Game extends Observable{
         int vida2 = 0;
         for(Card card : deckJ2.getCards()){
             if (card instanceof PokemonCard)
-                vida2 += card.getVida();
+                if(deckJ2.getSelectedCard() != card){
+                    vida2 += card.getVida();
+                }
+
         }
         vida2 += Table.getInstance().getVida2();
         return(vida2 < 0 ? 0 : vida2);
     }
 
-    public boolean allPokDead1() { return getvida1() == 0 ? true : false;  }
+    public boolean allPokDead1() {
+        System.out.print("Vida 1: " + getvida1() + " Vida 2: " + getvida2() );
+
+        return getvida1() == 0 ? true : false;  }
 
     public boolean allPokDead2(){ return getvida2() == 0 ? true : false;  }
 

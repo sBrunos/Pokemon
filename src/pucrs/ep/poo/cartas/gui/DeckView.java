@@ -65,6 +65,7 @@ public class DeckView extends VBox implements CardObserver,Observer{
         for(int i=0;i<cards.size();i++){
             CardView cv = (CardView)cards.get(i);
             if (cv.getCard() == selectedCard){
+
                 getChildren().remove(cv);
                 selectedCard = null;
             }

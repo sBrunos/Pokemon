@@ -56,13 +56,13 @@ public class TableView extends GridPane implements Observer {
         atkpk1 = new Label();
         atkpk2 = new Label();
 
-        vida1.setText(""+Game.getInstance().getvida1());
-        vida2.setText(""+Game.getInstance().getvida2());
+        vida1.setText("Vida Total: "+Game.getInstance().getvida1());
+        vida2.setText("Vida Total: "+Game.getInstance().getvida2());
 
-        vidapk1.setText(""+0);
-        vidapk2.setText(""+0);
-        atkpk1.setText(""+0);
-        atkpk2.setText(""+0);
+        vidapk1.setText("Vida: "+0);
+        vidapk2.setText("Vida: "+0);
+        atkpk1.setText("Ataque: "+0);
+        atkpk2.setText("Ataque: "+0);
 
         placar.add(vidapk1,0,0);
         //placar.add(new Label("<--- vida"), 1, 0);
@@ -130,13 +130,13 @@ public class TableView extends GridPane implements Observer {
 
     @Override
     public void update(Observable o,Object arg){
-        vida1.setText(""+Game.getInstance().getvida1());
-        vida2.setText(""+Game.getInstance().getvida2());
+        vida1.setText("Vida Total: "+Game.getInstance().getvida1());
+        vida2.setText("Vida Total: "+Game.getInstance().getvida2());
 
-        vidapk1.setText(""+Table.getInstance().getVida1());
-        vidapk2.setText(""+Table.getInstance().getVida2());
-        atkpk1.setText(""+Table.getInstance().getAtaque1());
-        atkpk2.setText(""+Table.getInstance().getAtaque2());
+        vidapk1.setText("Vida: "+Table.getInstance().getVida1());
+        vidapk2.setText("Vida: "+Table.getInstance().getVida2());
+        atkpk1.setText("Ataque: "+Table.getInstance().getAtaque1());
+        atkpk2.setText("Ataque: "+Table.getInstance().getAtaque2());
 
         if (Table.getInstance().getPokJog1() == null)
             pane1.setGraphic(null);
