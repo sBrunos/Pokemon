@@ -61,7 +61,7 @@ public class CardDeck extends Observable{
     public Card getSelectedCard(){
         return(selected);
     }//pergunta se a carta está selecionada
-    
+
     public void setSelectedCard(Card card){
         selected = card;
     }

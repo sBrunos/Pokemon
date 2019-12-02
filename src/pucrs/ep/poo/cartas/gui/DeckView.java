@@ -46,14 +46,14 @@ public class DeckView extends VBox implements CardObserver,Observer{
             cDeck.flipCards(Card.Face.UP);
         }
     }
-    
-    @Override
+
     public void cardSelected(CardView cv){
             cDeck.setSelectedCard(cv.getCard());
 
             Table.getInstance().setCard(cv, jogador);
 
             selectedCard = cv.getCard();
+
             selectedCard.setOnBattle();
 
             removeSel();
@@ -69,10 +69,6 @@ public class DeckView extends VBox implements CardObserver,Observer{
                 selectedCard = null;
             }
         }
-        if (jogador == 1)
-            Game.getInstance().setDeck1(cDeck);
-        else
-            Game.getInstance().setDeck2(cDeck);
     }
     
     @Override

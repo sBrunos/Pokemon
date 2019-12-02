@@ -85,15 +85,6 @@ public class Game extends Observable{
     public void play(){//fazer a jogada
         GameEvent gameEvent = null;
 
-        if (allPokDead1() || allPokDead2() ){//
-            gameEvent = new GameEvent(GameEvent.Target.GWIN,GameEvent.Action.ENDGAME, "");//
-            setChanged();//
-            notifyObservers((Object)gameEvent);//
-            deckJ1.flipCards(Card.Face.UP);
-            deckJ2.flipCards(Card.Face.UP);
-            return;
-        }
-
         if(Table.getInstance().getPokJog1() != null && Table.getInstance().getPokJog2() != null){
             Table.getInstance().setBattleMode(Table.BattleMode.ON);
             deckJ1.flipCards(Card.Face.DOWN);
@@ -107,50 +98,26 @@ public class Game extends Observable{
             deckJ1.flipCards(Card.Face.UP);;
             deckJ2.flipCards(Card.Face.DOWN);
         }else{
-            player = 1;
+            player = player == 1 ? 2 : 1;
             deckJ1.flipCards(Card.Face.UP);
             deckJ2.flipCards(Card.Face.DOWN);
 
         }
 
+        if ( allPokDead1() || allPokDead2() ){//
+            gameEvent = new GameEvent(GameEvent.Target.GWIN,GameEvent.Action.ENDGAME, "");//
+            setChanged();//
+            notifyObservers((Object)gameEvent);//
+            deckJ1.flipCards(Card.Face.UP);
+            deckJ2.flipCards(Card.Face.UP);
+            return;
+        }
 
-        //setChanged();
-        //notifyObservers();
-
-        /*
-        if (player == 3){//
-                gameEvent = new GameEvent(GameEvent.Target.GWIN,GameEvent.Action.BATTLETIME,"");//
-                setChanged();//
-                notifyObservers((Object)gameEvent);//
-                return;
-        }        
-        if (deckAcionado == deckJ1){//
-            if (player != 1){//não é do jo 1
-                gameEvent = new GameEvent(GameEvent.Target.GWIN,GameEvent.Action.INVPLAY,"2");//
-               // gameEvent = new GameEvent(GameEvent.Target.GWIN,GameEvent.Action.INVPLAY,"2");//mensagem de erro
-                //se tem erro mostra
-                setChanged();//
-                notifyObservers((Object)gameEvent);//
-            }else{
-                // Proximo jogador
-                nextPlayer();//n jog passa a ser 3
-            }
-        }else if (deckAcionado == deckJ2){
-            if (player != 2){
-                gameEvent = new GameEvent(GameEvent.Target.GWIN,GameEvent.Action.INVPLAY,"1");//aqui tem que mexer para o nosso jogo
-                setChanged();
-                notifyObservers((Object)gameEvent);
-            }else{
-                // Verifica quem ganhou a rodada
-                setChanged();
-                notifyObservers((Object)gameEvent);
-                // Próximo jogador
-                nextPlayer();
-            }
-        }       */
+        setChanged();
+        notifyObservers();
     }
 
-    // Acionada pelo botao de limpar    
+    // Acionada pelo botao de limpar
     public void removeSelected(){
         GameEvent gameEvent = null;
 

@@ -24,21 +24,21 @@ public class PokemonCard extends Card{
         if(id< 11 && id > 0){
             switch (id){
                 case 1:
-                    super.setVida(10);
+                    super.setVida(15);
                     super.setAtaque(5);
                     e = elemento.AGUA;
                     vantagem.add(elemento.FOGO);
                     break;
                 case 2:
                     super.setVida(15);
-                    super.setAtaque(2);
+                    super.setAtaque(8);
                     e = elemento.GRAMA;
                     vantagem.add(elemento.PEDRA);
                     vantagem.add(elemento.TERRA);
                     break;
                 case 3:
                     super.setVida(8);
-                    super.setAtaque(8);
+                    super.setAtaque(2);
                     e = elemento.INSETO;
                     vantagem.add(elemento.GRAMA);
 
@@ -52,14 +52,14 @@ public class PokemonCard extends Card{
                     vantagem.add(elemento.VENENO);
                     break;
                 case 5:
-                    super.setVida(11);
-                    super.setAtaque(4);
+                    super.setVida(10);
+                    super.setAtaque(9);
                     e = elemento.PEDRA;
                     vantagem.add(elemento.VOADOR);
                     vantagem.add(elemento.ELETRICO);
                     break;
                 case 6:
-                    super.setVida(9);
+                    super.setVida(6);
                     super.setAtaque(12);
                     e = elemento.VOADOR;
                     vantagem.add(elemento.INSETO);
@@ -67,8 +67,8 @@ public class PokemonCard extends Card{
                     vantagem.add(elemento.TERRA);
                     break;
                 case 7:
-                    super.setVida(8);
-                    super.setAtaque(6);
+                    super.setVida(9);
+                    super.setAtaque(4);
                     e = elemento.ELETRICO;
                     vantagem.add(elemento.VOADOR);
                     break;
